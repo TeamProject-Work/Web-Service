@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>contact</title>
+
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./style.css">
+    <script>
+        function handleSubmit(e) {
+            e.preventDefault();
+
+            const form = e.target;
+            const fullName = form.fullName.value;
+            const email = form.email.value;
+            const phone = form.phone.value;
+            const subject = form.subject.value;
+            const message = form.message.value;
+
+            const BOT_TOKEN = "BOT_TOKEN";
+            const CHAT_ID = "CHAT_ID";
+            const now = new Date();
+            const currentDate = now.toLocaleDateString("en-US");
+            const currentTime = now.toLocaleTimeString("en-US");
+
+            const text = `
+NEW CUSTOMER CONTACT
+===============================
+FULL NAME : ${fullName}
+Email     : ${email}
+Telephone : ${phone}
+Subject   : ${subject}
+Message   : ${message}
+===============================
+DATE      : ${currentDate}
+Time      : ${currentTime}
+BY        : ITEA BOT
+`;
+
+            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    chat_id: CHAT_ID,
+                    text: text,
+                }),
+            })
+                .then((res) => {
+                    if (res.ok) {
+                        alert("Message sent successfully!");
+                        form.reset();
+                    } else {
+                        alert("Failed to send message.");
+                    }
+                })
+                .catch((err) => {
+                    console.error("Error:", err);
+                    alert("An error occurred. Please try again.");
+                });
+        }
+    </script>
+    <style>
+        #map {
+            position: relative;
+            width: 100%;
+            padding: 50px 0;
+            background-color: #000562;
+            /* Tailwind's primary */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .map-wrapper {
+            width: 95%;
+            max-width: 1424px;
+            height: auto;
+            position: relative;
+        }
+
+        .map-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .dot {
+            width: 16px;
+            height: 16px;
+            background-color: #ef4444;
+            /* Tailwind red-500 */
+            border-radius: 9999px;
+            position: absolute;
+            cursor: pointer;
+            animation: ping 1s infinite;
+        }
+
+        @keyframes ping {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            75%,
+            100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+
+        .location-popup {
+            position: absolute;
+            background-color: white;
+            color: black;
+            padding: 8px 12px;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        @media (min-width: 640px) {
+            .dot {
+                left: 73%;
+                top: 45%;
+            }
+        }
+
+        @media (max-width: 639px) {
+            .dot {
+                left: 75%;
+                top: 55%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="w-[95%] 2xl:w-[1424px] m-auto mt-[15px] flex justify-between items-center">
+        <!-- Logo -->
+        <div class="flex items-center gap-[10px] text-[40px] md:text-[50px] font-bold text-white z-[110]">
+            <a href="/">ITEA</a>
+            <span class="w-[14px] h-[14px] rounded-[50%] bg-[#117EFF]"></span>
+        </div>
+
+        <!-- Mobile Menu Button -->
+             <button id="menuToggle" aria-label="Toggle menu" class="block lg:hidden" style="position: sticky; top: 10px; right: 10px; z-index: 10000; background: transparent; border: none; cursor: pointer;">
+
+            <span class="bar top-bar"></span>
+            <span class="bar middle-bar"></span>
+            <span class="bar bottom-bar"></span>
+        </button>
+
+        <!-- Nav Menu -->
+        <nav class="hidden lg:block z-[100]">
+            <ul class="flex gap-[30px] text-white">
+                <li class="text-[18px] capitalize"><a href="/" class="nav-link">Home</a></li>
+                <li class="text-[18px] capitalize"><a href="/about.html" class="nav-link">About</a></li>
+                <li class="text-[18px] capitalize"><a href="/service.html" class="nav-link">Service</a></li>
+                <li class="text-[18px] capitalize"><a href="/portfolio.html" class="nav-link">Portfolio</a></li>
+                <li class="text-[18px] capitalize"><a href="/contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+
+        <nav id="mobileMenu"
+            class="fixed top-0 left-0 w-full h-full bg-black/70 backdrop-blur-[6px] flex-col items-center justify-center gap-[20px] z-[9999] hidden">
+            <ul class="flex flex-col items-center justify-center h-full gap-[20px]">
+                <li class="text-[25px] text-white uppercase"><a href="/" class="nav-link">Home</a></li>
+                <li class="text-[25px] text-white uppercase"><a href="/about.html" class="nav-link">About</a></li>
+                <li class="text-[25px] text-white uppercase"><a href="/service.html" class="nav-link">Service</a></li>
+                <li class="text-[25px] text-white uppercase"><a href="/portfolio.html" class="nav-link">Portfolio</a>
+                </li>
+                <li class="text-[25px] text-white uppercase"><a href="/contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class='flex flex-col gap-[50px] xl:gap-[90px]'>
+        <section class="heroSection w-full m-auto relative mt-[-75px] md:mt-[-90px] py-[20vh] md:py-[15vh]">
+            <div class="absolute top-0 left-0 w-full h-full bg-[#000562] opacity-80  z-10"></div>
+            <div class="relative z-20 w-full">
+                <h2 class="w-full  m-0 md:mt-[30px] text-center text-[38px] md:text-[48px] text-white uppercase font-bold"
+                    title="Our Services">
+                    Contact
+                </h2>
+                <p
+                    class="flex items-center justify-center gap-[15px] m-0 mt-[15px] text-[18px] text-[#FF7F00] font-medium">
+                    <a href="/">Home</a> &gt; <a href="/contact">contact</a>
+                </p>
+            </div>
+        </section>
+        <section id="contact"
+            class="w-[95%] mx-auto 2xl:w-[1424px] flex flex-col gap-[30px] lg:gap-0 lg:flex-row mt-10">
+            <!-- Left Side Image & Text -->
+            <div class="w-full md:w-[70%] m-auto lg:w-[40%]">
+                <div class="w-full lg:w-[540px] h-auto">
+                    <img src="./assets/img/pic-contact.png" alt="picture contact" class="w-full h-auto object-cover" />
+                </div>
+                <p class="text-[18px] font-bold text-[#000562]/60 mt-4">
+                    We’d love to hear from you! Whether you have a project idea or need
+                    support, our team is here to help
+                </p>
+            </div>
+
+            <!-- Right Side Form -->
+            <form onsubmit="handleSubmit(event)" class="w-full md:w-[70%] lg:w-[40%] mx-auto">
+                <div class="mb-[30px]">
+                    <label for="fullName" class="block text-[15px] font-medium uppercase mb-2">Full
+                        Name</label>
+                    <input type="text" id="fullName" name="fullName" placeholder="Ex. chhun chan devit" required
+                        class="w-full px-[25px] bg-[#fff] py-[18px] focus:outline-none text-[#000562] text-[15px] font-medium" />
+                </div>
+
+                <div class="mb-[30px]">
+                    <label for="email" class="block text-[15px] font-medium uppercase mb-2">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Ex. youremail@gmail.com" required
+                        class="w-full px-[25px] bg-[#fff] py-[18px] focus:outline-none text-[#000562] text-[15px] font-medium" />
+                </div>
+
+                <div class="mb-[30px]">
+                    <label for="phone" class="block text-[15px] font-medium uppercase mb-2">Phone</label>
+                    <input type="text" id="phone" name="phone" placeholder="Ex. 078 550 172" required
+                        class="w-full px-[25px] bg-[#fff] py-[18px] focus:outline-none text-[#000562] text-[15px] font-medium" />
+                </div>
+
+                <div class="mb-[30px]">
+                    <label for="subject" class="block text-[15px] font-medium uppercase mb-2">Subject</label>
+                    <input type="text" id="subject" name="subject" placeholder="Ex. work for web developer" required
+                        class="w-full px-[25px] bg-[#fff] py-[18px] focus:outline-none text-[#000562] text-[15px] font-medium" />
+                </div>
+
+                <div class="mb-6">
+                    <label for="message" class="block text-[15px] font-medium uppercase mb-2">Message</label>
+                    <textarea id="message" name="message" placeholder="Ex. your message" rows="5" required
+                        class="w-full px-[25px] text-[#000562] text-[15px] font-medium bg-[#fff] py-[18px] focus:outline-none"></textarea>
+                </div>
+
+                <button type="submit"
+                    class="bg-[#FF7F00] hover:bg-[#FF7F00]/95 w-[150px] h-[50px] text-[#fff] text-[15px] rounded-[90px] cursor-pointer font-bold">
+                    Send
+                </button>
+            </form>
+        </section>
+
+        <section id="map">
+            <div class="map-wrapper">
+                <img src="./assets/img/pic-map.webp" alt="Dotted World Map" class="map-image" />
+
+                <button id="mapDot" class="dot"></button>
+
+                <div id="locationInfo" class="location-popup" style="display: none; left: 80%; top: 45%;">
+                    📍 Phnom Penh, Cambodia
+                </div>
+            </div>
+        </section>
+        <section id="find-answer-question" class="w-[95%] 2xl:w-[1424px] mx-auto">
+            <header class="text-center">
+                <h2 class="text-[38px] text-[#000562] lg:text-[48px] font-bold uppercase">
+                    FAQ
+                </h2>
+            </header>
+
+            <div class="flex flex-col mt-[50px] gap-[15px]">
+
+                <!-- FAQ Item 1 -->
+                <div class="w-full">
+                    <details class="w-full group p-[20px] bg-white">
+                        <summary class="flex justify-between items-center cursor-pointer list-none">
+                            <h3 class="text-[18px] font-medium text-black/80">
+                                How long does it take to get a response after contacting ITEA Digital?
+                            </h3>
+                            <img src="./assets/img/icon-plus.svg" alt="Toggle Icon"
+                                class="transition-transform duration-300 group-open:rotate-180" />
+                        </summary>
+                        <p
+                            class="mt-[15px] py-4 hidden border-t border-primary group-open:block text-[18px] font-medium text-primary/60">
+                            We typically respond within 24 hours. For urgent inquiries, feel free to call us directly.
+                        </p>
+                    </details>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="w-full">
+                    <details class="w-full group p-[20px] bg-white">
+                        <summary class="flex justify-between items-center cursor-pointer list-none">
+                            <h3 class="text-[18px] font-medium text-black/80">
+                                What services can I inquire about through the contact form?
+                            </h3>
+                            <img src="./assets/img/icon-plus.svg" alt="Toggle Icon"
+                                class="transition-transform duration-300 group-open:rotate-180" />
+                        </summary>
+                        <p
+                            class="mt-[15px] py-4 hidden border-t border-primary group-open:block text-[18px] font-medium text-primary/60">
+                            You can ask about Web Development, System Development, SEO, UX/UI Design, Mobile App
+                            Development, and E-commerce Solutions.
+                        </p>
+                    </details>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="w-full">
+                    <details class="w-full group p-[20px] bg-white">
+                        <summary class="flex justify-between items-center cursor-pointer list-none">
+                            <h3 class="text-[18px] font-medium text-black/80">
+                                Do you offer free consultations for new projects?
+                            </h3>
+                            <img src="./assets/img/icon-plus.svg" alt="Toggle Icon"
+                                class="transition-transform duration-300 group-open:rotate-180" />
+                        </summary>
+                        <p
+                            class="mt-[15px] py-4 hidden border-t border-primary group-open:block text-[18px] font-medium text-primary/60">
+                            Yes! We provide a free initial consultation to discuss your project and understand your
+                            needs.
+                        </p>
+                    </details>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="w-full">
+                    <details class="w-full group p-[20px] bg-white">
+                        <summary class="flex justify-between items-center cursor-pointer list-none">
+                            <h3 class="text-[18px] font-medium text-black/80">
+                                How can I track the progress of my project after contacting you?
+                            </h3>
+                            <img src="./assets/img/icon-plus.svg" alt="Toggle Icon"
+                                class="transition-transform duration-300 group-open:rotate-180" />
+                        </summary>
+                        <p
+                            class="mt-[15px] py-4 hidden border-t border-primary group-open:block text-[18px] font-medium text-primary/60">
+                            Once we start working together, we provide regular updates through emails, meetings, or
+                            project management tools
+                        </p>
+                    </details>
+                </div>
+
+            </div>
+        </section>
+
+
+    </main>
+    <footer class="bg-primary w-full mt-[50px] lg:mt-[90px] text-white pt-[70px] pb-[30px]">
+        <section class="w-[95%] 2xl:w-[1424px] m-auto">
+            <div
+                class="grid gap-[50px] text-center md:text-left justify-center md:gap-[90px] md:flex md:flex-wrap lg:gap-[70px] xl:gap-0 xl:justify-between">
+                <!-- Brand -->
+                <div class="flex flex-col md:items-start items-center">
+                    <div
+                        class="flex items-center gap-[10px] text-[40px] md:text-[50px] font-bold text-[#fff] z-[110] mb-[10px]">
+                        <a href="/">ITEA</a>
+                        <span class="w-[14px] h-[14px] rounded-[50%] bg-[#117EFF]"></span>
+                    </div>
+                    <nav aria-label="Social Media">
+                        <ul class="flex gap-[15px] items-center">
+                            <li title="facebook">
+                                <a href="#" aria-label="Facebook" class="w-[30px] h-[30px]">
+                                    <img src="./assets/img/icon-facebook.svg" alt="icon facebook"
+                                        class="w-full h-full object-cover" />
+                                </a>
+                            </li>
+                            <li title="telegram">
+                                <a href="#" aria-label="Telegram" class="w-[30px] h-[30px]">
+                                    <img src="./assets/img/icon-telegram.svg" alt="icon Telegram"
+                                        class="w-full h-full object-cover" />
+                                </a>
+                            </li>
+                            <li title="tiktok">
+                                <a href="#" aria-label="Tiktok" class="w-[30px] h-[30px]">
+                                    <img src="./assets/img/icon-titok.svg" alt="icon Tiktok"
+                                        class="w-full h-full object-cover" />
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <!-- Navigation -->
+                <nav aria-label="Main Navigation">
+                    <h3 class="font-bold text-[18px] mb-2 uppercase">Navigation</h3>
+                    <ul class="space-y-3 mt-[30px] text-[18px]">
+                        <li><a href="/" class="hover:underline">Home</a></li>
+                        <li><a href="/service.html" class="hover:underline">Service</a></li>
+                        <li><a href="/portfolio.html" class="hover:underline">Portfolio</a></li>
+                    </ul>
+                </nav>
+
+                <!-- Quick Links -->
+                <nav aria-label="Quick Links">
+                    <h3 class="font-bold text-[18px] mb-2 uppercase">Quick Links</h3>
+                    <ul class="space-y-3 mt-[30px]">
+                        <li><a href="/about.html" class="hover:underline">About Us</a></li>
+                        <li><a href="/privacy" class="hover:underline">Privacy & Policy</a></li>
+                        <li><a href="/term" class="hover:underline">Term and Condition</a></li>
+                    </ul>
+                </nav>
+
+                <!-- Contact -->
+                <address class="not-italic">
+                    <h3 class="font-bold text-[18px] mb-2 uppercase">Get In Touch</h3>
+                    <ul class="space-y-3 mt-[30px]">
+                        <li><a href="/contact.html" class="hover:underline">Contact</a></li>
+                        <li><a href="tel:+85578550172">(+855) 78 550 172</a></li>
+                        <li><a href="mailto:contact@iteadigital.com">contact@iteadigital.com</a></li>
+                    </ul>
+                </address>
+
+                <!-- Popular Services -->
+                <nav aria-label="POPULAR SERVICE">
+                    <h3 class="font-bold text-[18px] mb-2 uppercase">POPULAR SERVICE</h3>
+                    <ul class="space-y-3 mt-[30px]">
+                        <li><a href="/service.html" class="hover:underline">Web Development</a></li>
+                        <li><a href="/service.html" class="hover:underline">UX / UI Design</a></li>
+                        <li><a href="/service.html" class="hover:underline">SEO Optimization</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div
+                class="border-t border-[#117EFF]/60 mt-[70px] pt-[30px] flex flex-col lg:flex-row justify-between items-center text-[18px]">
+                <p class="text-center md:text-left">
+                    Copyright ©2025 All rights reserved | Made by
+                    <a href="https://iteadigital.com" class="text-accent hover:underline">
+                        <span class="text-[#117EFF]">ITEA</span> DIGITAL
+                    </a>
+                </p>
+                <div class="mt-2 lg:mt-0">
+                    <label for="language" class="sr-only">Language</label>
+                    <select id="language" name="language" class="bg-transparent border-none outline-none text-white">
+                        <option value="en" class="text-primary">ENGLISH</option>
+                        <option value="kh" class="text-primary">KHMER</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+    </footer>
+    <script>
+        const dot = document.getElementById("mapDot");
+        const popup = document.getElementById("locationInfo");
+
+        dot.addEventListener("click", () => {
+            popup.style.display = popup.style.display === "none" ? "block" : "none";
+        });
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>

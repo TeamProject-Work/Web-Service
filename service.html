@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./style.css">
+    <title>Service</title>
+    <script defer>
+        document.addEventListener("DOMContentLoaded", function () {
+            const cards = document.querySelectorAll(".client-card");
+            const itemsPerPage = 3;
+            let startIndex = 0;
+
+            const updateView = () => {
+                cards.forEach((card, i) => {
+                    card.classList.add("hidden");
+                    if (i >= startIndex && i < startIndex + itemsPerPage) {
+                        card.classList.remove("hidden");
+                    }
+                });
+
+                document.getElementById("prevBtn").disabled = startIndex === 0;
+                document.getElementById("nextBtn").disabled = startIndex + itemsPerPage >= cards.length;
+            };
+
+            document.getElementById("prevBtn").addEventListener("click", () => {
+                if (startIndex - itemsPerPage >= 0) {
+                    startIndex -= itemsPerPage;
+                    updateView();
+                }
+            });
+
+            document.getElementById("nextBtn").addEventListener("click", () => {
+                if (startIndex + itemsPerPage < cards.length) {
+                    startIndex += itemsPerPage;
+                    updateView();
+                }
+            });
+
+            updateView();
+        });
+    </script>
+</head>
+
+<body class="">
+    <header class="w-[95%] 2xl:w-[1424px] m-auto mt-[15px] flex justify-between items-center">
+        <!-- Logo -->
+        <div class="flex items-center gap-[10px] text-[40px] md:text-[50px] font-bold text-white z-[110]">
+            <a href="/">ITEA</a>
+            <span class="w-[14px] h-[14px] rounded-[50%] bg-[#117EFF]"></span>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button id="menuToggle" aria-label="Toggle menu" class="block lg:hidden"
+            style="position: sticky; top: 10px; right: 10px; z-index: 10000; background: transparent; border: none; cursor: pointer;">
+
+            <span class="bar top-bar"></span>
+            <span class="bar middle-bar"></span>
+            <span class="bar bottom-bar"></span>
+        </button>
+
+        <!-- Nav Menu -->
+        <nav class="hidden lg:block z-[100]">
+            <ul class="flex gap-[30px] text-white">
+                <li class="text-[18px] capitalize"><a href="/" class="nav-link">Home</a></li>
+                <li class="text-[18px] capitalize"><a href="/about.html" class="nav-link">About</a></li>
+                <li class="text-[18px] capitalize"><a href="/service.html" class="nav-link">Service</a></li>
+                <li class="text-[18px] capitalize"><a href="/portfolio.html" class="nav-link">Portfolio</a></li>
+                <li class="text-[18px] capitalize"><a href="/contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+
+        <nav id="mobileMenu"
+            class="fixed top-0 left-0 w-full h-full bg-black/70 backdrop-blur-[6px] flex-col items-center justify-center gap-[20px] z-[9999] hidden">
+            <ul class="flex flex-col items-center justify-center h-full gap-[20px]">
+                <li class="text-[25px] text-white uppercase"><a href="/" class="nav-link">Home</a></li>
+                <li class="text-[25px] text-white uppercase"><a href="/about.html" class="nav-link">About</a></li>
+                <li class="text-[25px] text-white uppercase"><a href="/service.html" class="nav-link">Service</a></li>
+                <li class="text-[25px] text-white uppercase"><a href="/portfolio.html" class="nav-link">Portfolio</a>
+                </li>
+                <li class="text-[25px] text-white uppercase"><a href="/contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class='flex flex-col gap-[50px] xl:gap-[90px]'>
+        <section class="heroSection w-full m-auto relative mt-[-75px] md:mt-[-90px] py-[20vh] md:py-[15vh]">
+            <div class="absolute top-0 left-0 w-full h-full bg-[#000562] opacity-80  z-10"></div>
+            <div class="relative z-20 w-full">
+                <h2 class="w-full  m-0 md:mt-[30px] text-center text-[38px] md:text-[48px] text-white uppercase font-bold"
+                    title="Our Services">
+                    Services
+                </h2>
+                <p
+                    class="flex items-center justify-center gap-[15px] m-0 mt-[15px] text-[18px] text-[#FF7F00] font-medium">
+                    <a href="/">Home</a> &gt; <a href="/services">services</a>
+                </p>
+            </div>
+        </section>
+
+        <section id="services" class="w-[95%] mx-auto 2xl:w-[1424px] py-16">
+            <header class="text-center mb-12" data-aos="fade-up" data-aos-duration="1000">
+                <h2 class="text-[38px] text-[#000562] lg:text-[48px] font-bold uppercase">
+                    what we do?
+                </h2>
+            </header>
+
+            <div class="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+                <!-- Service Item 1 -->
+                <article data-aos="fade-up" data-aos-duration="1000"
+                    class="relative flex flex-col gap-4 bg-white [#000562]g-white px-8 pt-8 pb-14 text-center overflow-hidden group border border-transparent  transition-shadow">
+                    <div class="w-14 h-14 mx-auto">
+                        <img src="/assets/img/icon-wb.svg" alt="Web Development" class="w-full h-full object-contain" />
+                    </div>
+                    <h3 class="text-[25px] font-bold text-[rgb(0,0,0,0.8)]">Web Development</h3>
+                    <p class="text-[18px] font-bold text-[#000562]/60">
+                        We build responsive and scalable websites tailored to your needs.
+                    </p>
+                    <div
+                        class="absolute inset-0 border-2 border-[#000562]/70 opacity-0 group-hover:opacity-100 animate-border-circle">
+                    </div>
+                </article>
+
+                <!-- Service Item 2 -->
+                <article data-aos="fade-up" data-aos-duration="1000"
+                    class="relative flex flex-col gap-4 bg-white px-8 pt-8 pb-14 text-center overflow-hidden group border border-transparent  transition-shadow">
+                    <div class="w-14 h-14 mx-auto">
+                        <img src="/assets/img/icon-seo.svg" alt="Mobile Apps" class="w-full h-full object-contain" />
+                    </div>
+                    <h3 class="text-[25px] font-bold text-[rgb(0,0,0,0.8)]">SEO Optimization</h3>
+                    <p class="text-[18px] font-bold text-[#000562]/60">
+                        Enhancing website visibility to rank higher on search engines
+                    </p>
+                    <div
+                        class="absolute inset-0 border-2 border-[#000562]/70 opacity-0 group-hover:opacity-100 animate-border-circle">
+                    </div>
+                </article>
+
+                <article data-aos="fade-up" data-aos-duration="1000"
+                    class="relative flex flex-col gap-4 bg-white px-8 pt-8 pb-14 text-center overflow-hidden group border border-transparent  transition-shadow">
+                    <div class="w-14 h-14 mx-auto">
+                        <img src="/assets/img/icon-mobile.svg" alt="Mobile Apps" class="w-full h-full object-contain" />
+                    </div>
+                    <h3 class="text-[25px] font-bold text-[rgb(0,0,0,0.8)]">Mobile Apps</h3>
+                    <p class="text-[18px] font-bold text-[#000562]/60">
+                        Creating user-friendly mobile applications for Android and iOS
+                    </p>
+                    <div
+                        class="absolute inset-0 border-2 border-[#000562]/70 opacity-0 group-hover:opacity-100 animate-border-circle">
+                    </div>
+                </article>
+                <article data-aos="fade-up" data-aos-duration="1000"
+                    class="relative flex flex-col gap-4 bg-white px-8 pt-8 pb-14 text-center overflow-hidden group border border-transparent  transition-shadow">
+                    <div class="w-14 h-14 mx-auto">
+                        <img src="/assets/img/icon-ecommerce.svg" alt="UI/UX Design"
+                            class="w-full h-full object-contain" />
+                    </div>
+                    <h3 class="text-xl  font-bold text-black/80">E-commerce</h3>
+                    <p class="text-base  font-semibold text-[#000562]">
+                        Developing online stores for seamless shopping experiences
+                    </p>
+                    <div
+                        class="absolute inset-0 border-2 border-[#000562]/70 opacity-0 group-hover:opacity-100 animate-border-circle">
+                    </div>
+                </article>
+                <!-- Service Item 3 -->
+                <article data-aos="fade-up" data-aos-duration="1000"
+                    class="relative flex flex-col gap-4 bg-white px-8 pt-8 pb-14 text-center overflow-hidden group border border-transparent  transition-shadow">
+                    <div class="w-14 h-14 mx-auto">
+                        <img src="/assets/img/icon-ux-ui.svg" alt="UI/UX Design" class="w-full h-full object-contain" />
+                    </div>
+                    <h3 class="text-[25px] font-bold text-[rgb(0,0,0,0.8)]">UI/UX Design</h3>
+                    <p class="text-[18px] font-bold text-[#000562]/60">
+                        Crafting modern, responsive, and high-performance websites.
+                    </p>
+                    <div
+                        class="absolute inset-0 border-2 border-[#000562]/70 opacity-0 group-hover:opacity-100 animate-border-circle">
+                    </div>
+                </article>
+
+                <article data-aos="fade-up" data-aos-duration="1000"
+                    class="relative flex flex-col gap-4 bg-white px-8 pt-8 pb-14 text-center overflow-hidden group border border-transparent  transition-shadow">
+                    <div class="w-14 h-14 mx-auto">
+                        <img src="/assets/img/icon-wb.svg" alt="UI/UX Design" class="w-full h-full object-contain" />
+                    </div>
+                    <h3 class="text-[25px] font-bold text-[rgb(0,0,0,0.8)]">System Development</h3>
+                    <p class="text-[18px] font-bold text-[#000562]/60">
+                        Building custom software solutions for businesses
+                    </p>
+                    <div
+                        class="absolute inset-0 border-2 border-[#000562]/70 opacity-0 group-hover:opacity-100 animate-border-circle">
+                    </div>
+                </article>
+
+                <!-- Add more service cards here as needed... -->
+            </div>
+        </section>
+        <section id="how-we-work" aria-labelledby="how-we-work-heading"
+            class="backroundimage bg-primary py-[50px] relative">
+            <div class="absolute top-0 left-0 w-full h-full bg-primary opacity-90  z-10"></div>
+            <div
+                class="relative z-20 w-[95%] m-auto  2xl:w-[1424px] items-center lg:items-start flex justify-center lg:justify-start gap-[30px] lg:gap-[50px] flex-col lg:flex-row">
+
+                <article class="order-2 lg:order-none w-full md:w-[70%]  lg:w-[45%]" aria-label="Company work flow">
+                    <header class="text-left">
+                        <h2 id="how-we-work-heading"
+                            class="text-[38px] text-[#fff] text-center lg:text-left lg:text-[48px] mb-[15px] font-bold uppercase"
+                            data-aos="fade-up" data-aos-duration="1000">
+                            how we work
+                        </h2>
+                    </header>
+                    <p data-aos="fade-up" data-aos-duration="1000"
+                        class="text-[#fff]/80 text-[18px] text-center lg:text-left font-bold">
+                        At ITEA Digital, we don’t just build software—we craft innovative solutions that drive real
+                        business
+                        success. Our process goes beyond writing code; it’s about deeply understanding your goals,
+                        identifying challenges, and creating tailored strategies that bring your vision to life. With a
+                        structured and agile approach, we ensure every project is efficient, scalable, and impactful.
+                        Whether it’s web development, mobile apps, or system solutions, we blend creativity, technology,
+                        and
+                        strategy to deliver results that truly make a difference.
+                    </p>
+                </article>
+
+                <div class="order-1 lg:order-none w-full h-auto md:w-[70%] lg:w-[43%]">
+                    <img src="./assets/img/pic-vission.png" alt="picture our vision"
+                        class="w-full h-auto object-cover" />
+                </div>
+
+            </div>
+        </section>
+
+        <section class="w-[95%] mx-auto 2xl:w-[1424px] flex flex-col items-center gap-[30px] lg:gap-[50px] my-10">
+            <h2 class="text-[38px] text-[#000562] lg:text-[48px] font-bold uppercase">OUR CLIENT SAY</h2>
+
+            <div class="relative w-full flex flex-col xl:flex-row items-center justify-center">
+                <div class="flex flex-wrap gap-[30px] justify-center w-full">
+                    <!-- Client Card 1 -->
+                    <article class="bg-white px-[25px] py-[44px] w-[100%] md:w-[350px] client-card" data-aos="fade-up">
+                        <div
+                            class="w-[150px] h-[150px] mx-auto border-[4px] border-[#117EFF] overflow-hidden rounded-full">
+                            <img src="./assets/img/itea2.png" alt="CEO KTEM JRORK"
+                                class="w-full h-full object-cover" />
+                        </div>
+                        <div class="mt-[15px] flex flex-col items-center justify-center">
+                            <h3 class="text-[20px] text-center text-black/80 font-bold uppercase mb-[10px]">CEO KTEM
+                                JRORK
+                            </h3>
+                            <div class="flex gap-1">
+                                <img src="./assets/img/star-line.svg">
+                                <img src="./assets/img/star-line.svg">
+                                <img src="./assets/img/star-line.svg">
+                                <img src="./assets/img/star-outline.svg">
+                                <img src="./assets/img/star-outline.svg">
+
+                            </div>
+                            <p class="mt-[30px] text-center text-[13px] text-[#000562]/60 font-medium">
+                                ITEA Digital transformed our online presence with a sleek, high-performance website.
+                                Their
+                                attention to detail and expertise made the entire process smooth and efficient!
+                            </p>
+                        </div>
+                    </article>
+                    <article class="bg-white px-[25px] py-[44px] w-[100%] md:w-[350px] client-card" data-aos="fade-up">
+                        <div
+                            class="w-[150px] h-[150px] mx-auto border-[4px] border-[#117EFF] overflow-hidden rounded-full">
+                            <img src="./assets/img/itea (2).png" alt="CEO KTEM JRORK"
+                                class="w-full h-full object-cover" />
+                        </div>
+                        <div class="mt-[15px] flex flex-col items-center justify-center">
+                            <h3 class="text-[20px] text-center text-black/80 font-bold uppercase mb-[10px]">CEO KTEM
+                                JRORK
+                            </h3>
+                            <div class="flex gap-1">
+                                <img src="./assets/img/star-line.svg">
+                                <img src="./assets/img/star-line.svg">
+                                <img src="./assets/img/star-line.svg">
+                                <img src="./assets/img/star-line.svg">
+                                <img src="./assets/img/star-line.svg">
+
+                            </div>
+                            <p class="mt-[30px] text-center text-[13px] text-[#000562]/60 font-medium">
+                                ITEA Digital transformed our online presence with a sleek, high-performance website.
+                                Their
+                                attention to detail and expertise made the entire process smooth and efficient!
+                            </p>
+                        </div>
+                    </article>
+                    <article class="bg-white px-[25px] py-[44px] w-[100%] md:w-[350px] client-card" data-aos="fade-up">
+                        <div
+                            class="w-[150px] h-[150px] mx-auto border-[4px] border-[#117EFF] overflow-hidden rounded-full">
+                            <img src="./assets/img/itea2.png" alt="CEO KTEM JRORK"
+                                class="w-full h-full object-cover" />
+                        </div>
+                        <div class="mt-[15px] flex flex-col items-center justify-center">
+                            <h3 class="text-[20px] text-center text-black/80 font-bold uppercase mb-[10px]">CEO KTEM
+                                JRORK
+                            </h3>
+                            <div class="flex gap-1">
+                                <img src="./assets/img/star-line.svg">
+                                <img src="./assets/img/star-line.svg">
+                                <img src="./assets/img/star-line.svg">
+                                <img src="./assets/img/star-line.svg">
+                                <img src="./assets/img/star-line.svg">
+
+                            </div>
+                            <p class="mt-[30px] text-center text-[13px] text-[#000562]/60 font-medium">
+                                ITEA Digital transformed our online presence with a sleek, high-performance website.
+                                Their
+                                attention to detail and expertise made the entire process smooth and efficient!
+                            </p>
+                        </div>
+                    </article>
+                    <article class="bg-white px-[25px] py-[44px] w-[100%] md:w-[350px] client-card" data-aos="fade-up">
+                        <div
+                            class="w-[150px] h-[150px] mx-auto border-[4px] border-[#117EFF] overflow-hidden rounded-full">
+                            <img src="./assets/img/itea (2).png" alt="CEO KTEM JRORK" class="w-full h-full object-cover" />
+                        </div>
+                        <div class="mt-[15px] flex flex-col items-center justify-center">
+                            <h3 class="text-[20px] text-center text-black/80 font-bold uppercase mb-[10px]">CEO KTEM
+                                JRORK
+                            </h3>
+                            <div class="flex gap-1">
+                                <img src="./assets/img/star-line.svg">
+                                <img src="./assets/img/star-line.svg">
+                                <img src="./assets/img/star-line.svg">
+                                <img src="./assets/img/star-line.svg">
+                                <img src="./assets/img/star-line.svg">
+
+                            </div>
+                            <p class="mt-[30px] text-center text-[13px] text-[#000562]/60 font-medium">
+                                ITEA Digital transformed our online presence with a sleek, high-performance website.
+                                Their
+                                attention to detail and expertise made the entire process smooth and efficient!
+                            </p>
+                        </div>
+                    </article>
+                    <article class="bg-white px-[25px] py-[44px] w-[100%] md:w-[350px] client-card" data-aos="fade-up">
+                        <div
+                            class="w-[150px] h-[150px] mx-auto border-[4px] border-[#117EFF] overflow-hidden rounded-full">
+                            <img src="./assets/img/itea.png" alt="CEO KTEM JRORK" class="w-full h-full object-cover" />
+                        </div>
+                        <div class="mt-[15px] flex flex-col items-center justify-center">
+                            <h3 class="text-[20px] text-center text-black/80 font-bold uppercase mb-[10px]">CEO KTEM
+                                JRORK
+                            </h3>
+                            <div class="flex gap-1">
+                                <img src="./assets/img/star-line.svg">
+                                <img src="./assets/img/star-line.svg">
+                                <img src="./assets/img/star-line.svg">
+                                <img src="./assets/img/star-line.svg">
+                                <img src="./assets/img/star-line.svg">
+                            </div>
+                            <p class="mt-[30px] text-center text-[13px] text-[#000562]/60 font-medium">
+                                ITEA Digital transformed our online presence with a sleek, high-performance website.
+                                Their
+                                attention to detail and expertise made the entire process smooth and efficient!
+                            </p>
+                        </div>
+                    </article>
+
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div
+                    class="flex xl:absolute xl:top-1/2 xl:-translate-y-1/2 xl:w-full justify-between xl:px-4 mt-6 xl:mt-0">
+                    <button id="prevBtn"
+                        class="text-[#000562]/80 text-[35px] px-4 py-2 cursor-pointer disabled:opacity-30">
+                        < </button>
+                            <button id="nextBtn"
+                                class="text-[#000562]/80 text-[35px] px-4 py-2 cursor-pointer disabled:opacity-30">
+                                >
+                            </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+    <footer class="bg-primary w-full mt-[50px] lg:mt-[90px] text-white pt-[70px] pb-[30px]">
+        <section class="w-[95%] 2xl:w-[1424px] m-auto">
+            <div
+                class="grid gap-[50px] text-center md:text-left justify-center md:gap-[90px] md:flex md:flex-wrap lg:gap-[70px] xl:gap-0 xl:justify-between">
+                <!-- Brand -->
+                <div class="flex flex-col md:items-start items-center">
+                    <div
+                        class="flex items-center gap-[10px] text-[40px] md:text-[50px] font-bold text-[#fff] z-[110] mb-[10px]">
+                        <a href="/">ITEA</a>
+                        <span class="w-[14px] h-[14px] rounded-[50%] bg-[#117EFF]"></span>
+                    </div>
+                    <nav aria-label="Social Media">
+                        <ul class="flex gap-[15px] items-center">
+                            <li title="facebook">
+                                <a href="#" aria-label="Facebook" class="w-[30px] h-[30px]">
+                                    <img src="./assets/img/icon-facebook.svg" alt="icon facebook"
+                                        class="w-full h-full object-cover" />
+                                </a>
+                            </li>
+                            <li title="telegram">
+                                <a href="#" aria-label="Telegram" class="w-[30px] h-[30px]">
+                                    <img src="./assets/img/icon-telegram.svg" alt="icon Telegram"
+                                        class="w-full h-full object-cover" />
+                                </a>
+                            </li>
+                            <li title="tiktok">
+                                <a href="#" aria-label="Tiktok" class="w-[30px] h-[30px]">
+                                    <img src="./assets/img/icon-titok.svg" alt="icon Tiktok"
+                                        class="w-full h-full object-cover" />
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <!-- Navigation -->
+                <nav aria-label="Main Navigation">
+                    <h3 class="font-bold text-[18px] mb-2 uppercase">Navigation</h3>
+                    <ul class="space-y-3 mt-[30px] text-[18px]">
+                        <li><a href="/" class="hover:underline">Home</a></li>
+                        <li><a href="/service.html" class="hover:underline">Service</a></li>
+                        <li><a href="/portfolio.html" class="hover:underline">Portfolio</a></li>
+                    </ul>
+                </nav>
+
+                <!-- Quick Links -->
+                <nav aria-label="Quick Links">
+                    <h3 class="font-bold text-[18px] mb-2 uppercase">Quick Links</h3>
+                    <ul class="space-y-3 mt-[30px]">
+                        <li><a href="/about.html" class="hover:underline">About Us</a></li>
+                        <li><a href="/privacy" class="hover:underline">Privacy & Policy</a></li>
+                        <li><a href="/term" class="hover:underline">Term and Condition</a></li>
+                    </ul>
+                </nav>
+
+                <!-- Contact -->
+                <address class="not-italic">
+                    <h3 class="font-bold text-[18px] mb-2 uppercase">Get In Touch</h3>
+                    <ul class="space-y-3 mt-[30px]">
+                        <li><a href="/contact.html" class="hover:underline">Contact</a></li>
+                        <li><a href="tel:+85578550172">(+855) 78 550 172</a></li>
+                        <li><a href="mailto:contact@iteadigital.com">contact@iteadigital.com</a></li>
+                    </ul>
+                </address>
+
+                <!-- Popular Services -->
+                <nav aria-label="POPULAR SERVICE">
+                    <h3 class="font-bold text-[18px] mb-2 uppercase">POPULAR SERVICE</h3>
+                    <ul class="space-y-3 mt-[30px]">
+                        <li><a href="/service.html" class="hover:underline">Web Development</a></li>
+                        <li><a href="/service.html" class="hover:underline">UX / UI Design</a></li>
+                        <li><a href="/service.html" class="hover:underline">SEO Optimization</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div
+                class="border-t border-[#117EFF]/60 mt-[70px] pt-[30px] flex flex-col lg:flex-row justify-between items-center text-[18px]">
+                <p class="text-center md:text-left">
+                    Copyright ©2025 All rights reserved | Made by
+                    <a href="https://iteadigital.com" class="text-accent hover:underline">
+                        <span class="text-[#117EFF]">ITEA</span> DIGITAL
+                    </a>
+                </p>
+                <div class="mt-2 lg:mt-0">
+                    <label for="language" class="sr-only">Language</label>
+                    <select id="language" name="language" class="bg-transparent border-none outline-none text-white">
+                        <option value="en" class="text-primary">ENGLISH</option>
+                        <option value="kh" class="text-primary">KHMER</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+    </footer>
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>

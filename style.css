@@ -1,0 +1,127 @@
+@import "tailwindcss";
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: #EFEFEF;
+}
+
+:root {
+  --color-primary: #000562;
+  --color-secondary: #FF7F00;
+  --color-profile: #117EFF;
+}
+
+
+.clipdiagonal {
+  clip-path: polygon(0% 0%, 100% 0, 100% 39%, 61% 100%, 0% 100%) !important;
+}
+
+.bg-primary {
+  background-color: var(--color-primary);
+}
+
+.bg-secondary {
+  background-color: var(--color-secondary);
+}
+
+.star {
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.backroundimage {
+  background:
+    url("./assets/img/backround.jpg") no-repeat center;
+  background-size: cover;
+  background-blend-mode: multiply;
+}
+
+.heroSection {
+  background:
+    url("./assets/img/banner-hero.jpg") no-repeat center;
+  background-size: cover;
+  background-blend-mode: multiply;
+}
+
+.nav-link {
+  position: relative;
+  transition: all 0.3s;
+}
+
+.bar {
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  background-color: white;
+  transition: all 0.3s ease-in-out;
+}
+
+.open .top-bar {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.open .middle-bar {
+  opacity: 0;
+}
+
+.open .bottom-bar {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Optional underline animation for links */
+.nav-link {
+  position: relative;
+  transition: all 0.3s ease-in-out;
+}
+
+.nav-link::before {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background: #117EFF;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease-in-out;
+}
+
+.nav-link:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.bar {
+      display: block;
+      width: 25px;
+      height: 3px;
+      margin: 5px auto;
+      background-color: white;
+      transition: all 0.3s ease-in-out;
+    }
+    .menu-open .top-bar {
+      transform: translateY(8px) rotate(45deg);
+    }
+    .menu-open .middle-bar {
+      opacity: 0;
+    }
+    .menu-open .bottom-bar {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+    #mobileMenu {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.8);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      color: white;
+      font-size: 25px;
+      text-transform: uppercase;
+      transition: opacity 0.3s ease;
+    }
+    #mobileMenu.hidden {
+      display: none;
+    }
