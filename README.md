@@ -1,1 +1,1 @@
-good luck if clone this project
+good luck
